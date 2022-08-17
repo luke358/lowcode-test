@@ -14,6 +14,8 @@
 
   &-left {
     left: 0;
+    height: calc(100vh - 20px);
+    overflow: auto;
 
     &-item {
       width: 250px;
@@ -52,7 +54,8 @@
   }
 
   &-right {
-    right: 0
+    right: 0;
+    height: calc(100vh - 20px);
   }
 
   &-top {

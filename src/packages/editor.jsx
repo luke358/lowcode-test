@@ -134,7 +134,7 @@ export default defineComponent({
         {
           (data.value.blocks.map((block, index) => (
             <EditorBlock
-              className='editor-block-preview'
+              className='editor-block-preview editor-block'
               block={block}
               formData={props.formData}
             ></EditorBlock>
@@ -146,7 +146,7 @@ export default defineComponent({
         {JSON.stringify(props.formData)}
       </div>
     </> : <div className="editor">
-      {JSON.stringify(data.value)}
+      {/* {JSON.stringify(data.value)} */}
       <div className="editor-left">
         {/* 根据注册列表 渲染对应的内容  可以实现h5的拖拽*/}
         {config.componentList.map(component => (
