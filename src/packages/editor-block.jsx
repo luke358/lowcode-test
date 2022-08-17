@@ -3,7 +3,8 @@ import BlockResize from "./block-resize";
 
 export default defineComponent({
   props: {
-    block: { type: Object }
+    block: { type: Object },
+    formData: { type: Object },
   },
   setup(props) {
 
@@ -29,19 +30,32 @@ export default defineComponent({
     return () => {
 
       const component = config.componentMap[props.block.key];
-
+      console.log({
+        size: props.block.hasResize ? { width: props.block.width, height: props.block.height } : {},
+        props: props.block.props,
+        model: Object.keys(component.model || {}).reduce((prev, modelName) => {
+          let propName = props.block.model[modelName]; // 'username'
+          prev[modelName] = {
+            modelValue: undefined, // 绑定的值
+            "onUpdate:modelValue": v => props.formData[propName] = v  // 修改值得方法传给当前组件
+          }
+          return prev;
+        }, {})
+      });
       const RenderComponent = component.render({
         size: props.block.hasResize ? { width: props.block.width, height: props.block.height } : {},
         props: props.block.props,
         model: Object.keys(component.model || {}).reduce((prev, modelName) => {
           let propName = props.block.model[modelName]; // 'username'
           prev[modelName] = {
-            modelValue: props.formData[propName], // zfjg
+            modelValue: undefined, // zfjg
             "onUpdate:modelValue": v => props.formData[propName] = v
           }
           return prev;
         }, {})
       })
+
+      console.log(props.formData)
 
       const { width, height } = component.resize || {}
 

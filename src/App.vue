@@ -6,11 +6,13 @@ import { registerConfig as config } from './utils/editor-config'
 
 provide('config', config)
 const state = ref(data)
+
+const formData = ref({})
 </script>
 
 <template>
   <div class="app">
-    <Editor v-model="state"/>
+    <Editor v-model="state" :formData="formData" />
   </div>
 </template>
 

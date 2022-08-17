@@ -2,15 +2,19 @@ import { defineComponent, computed, inject, ref } from 'vue'
 import deepcopy from 'deepcopy'
 
 import EditorBlock from './editor-block'
+import EditorOperator from './editor-operator'
+
 import { useMenuDragger } from './useMenuDragger'
 import { useBlockDragger } from './useBlockDragger'
 import { useFocus } from './useFocus'
+import { useCommand } from "./useCommand";
 
 import './editor.scss'
 
 export default defineComponent({
   props: {
-    modelValue: { type: Object }
+    modelValue: { type: Object },
+    formData: { type: Object }
   },
   setup(props, ctx) {
     const previewRef = ref(false);
@@ -45,7 +49,10 @@ export default defineComponent({
     // 2.组件拖拽
     let { mousedown, markLine } = useBlockDragger(focusData, lastSelectBlock, data);
 
+    const { commands } = useCommand(data, focusData); // []
+
     return () => <div className="editor">
+      {JSON.stringify(data.value)}
       <div className="editor-left">
         {
           config.componentList.map(component => (
@@ -62,7 +69,14 @@ export default defineComponent({
 
       </div>
       <div className="editor-top">菜单栏</div>
-      <div className="editor-right">属性控制栏目</div>
+      <div className="editor-right">
+        <EditorOperator
+          block={lastSelectBlock.value}
+          data={data.value}
+          updateContainer={commands.updateContainer}
+          updateBlock={commands.updateBlock}
+        ></EditorOperator>
+      </div>
       <div className="editor-container">
         {/* 负责产生滚动条 */}
         <div className="editor-container-canvas">
@@ -75,6 +89,7 @@ export default defineComponent({
             {
               (data.value.blocks.map((block, index) => (
                 <EditorBlock key={index} block={block}
+                  formData={props.formData}
                   className={block.focus ? 'editor-block-focus editor-block' : 'editor-block'}
                   onMousedown={(e) => blockMousedown(e, block, index)}
                 />
