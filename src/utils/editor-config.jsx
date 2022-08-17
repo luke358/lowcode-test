@@ -26,9 +26,15 @@ registerConfig.register({
 
 registerConfig.register({
   label: '按钮',
+  key: 'button',
+  resize: {
+    width: true,
+    height: true
+  },
   preview: () => <ElButton>预览按钮</ElButton>,
-  render: () => <ElButton>渲染按钮</ElButton>,
-  key: 'button'
+  render: ({ props, size }) => <ElButton style={{ height: size.height + 'px', width: size.width + 'px' }} type={props.type} size={props.size}>{props.text || '渲染按钮'}</ElButton>,
+  props: {
+  },
 })
 
 registerConfig.register({
