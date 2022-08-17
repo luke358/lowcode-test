@@ -66,8 +66,11 @@ registerConfig.register({
 
 registerConfig.register({
   label: '输入框',
+  resize: {
+    width: true, // 更改输入框的横向大小
+  },
   preview: () => <ElInput placeholder="预览输入框"></ElInput>,
-  render: () => <ElInput placeholder="预览输入框"></ElInput>,
+  render: ({ model, size }) => <ElInput placeholder="渲染输入框" {...model.default} style={{ width: size.width + 'px' }}></ElInput>,
   key: 'input',
   model: { // {default:'username'}
     default: '绑定字段'
