@@ -26,7 +26,7 @@ export default defineComponent({
     })
 
     const containerStyles = computed(() => ({
-      with: data.value.container.width + 'px',
+      width: data.value.container.width + 'px',
       height: data.value.container.height + 'px'
     }))
 
@@ -80,6 +80,10 @@ export default defineComponent({
                 />
               )))
             }
+
+            {markLine.x !== null && <div class="line-x" style={{ left: markLine.x + 'px' }}></div>}
+            {markLine.y !== null && <div class="line-y" style={{ top: markLine.y + 'px' }}></div>}
+
           </div>
         </div>
       </div>
