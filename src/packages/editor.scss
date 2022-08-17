@@ -6,9 +6,8 @@
   &-right {
     position: absolute;
     width: 270px;
-    background-color: red;
     top: 0;
-    bottom: 0;
+    bottom: 0
   }
 
   &-left {
@@ -20,7 +19,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #fff;
+      background: #fff;
       padding: 20px;
       box-sizing: border-box;
       cursor: move;
@@ -32,13 +31,13 @@
         position: absolute;
         top: 0;
         left: 0;
-        background-color: rgb(96, 205, 224);
+        background: rgb(96, 205, 224);
         color: #fff;
         padding: 4px;
       }
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -51,7 +50,7 @@
   }
 
   &-right {
-    right: 0;
+    right: 0
   }
 
   &-top {
@@ -59,7 +58,27 @@
     right: 280px;
     left: 280px;
     height: 80px;
-    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-button {
+      width: 60px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      ;
+      background: rgba(0, 0, 0, .3);
+      user-select: none;
+      cursor: pointer;
+      color: #fff;
+
+      &+& {
+        margin-left: 3px
+      }
+    }
   }
 
   &-container {
@@ -70,10 +89,11 @@
     &-canvas {
       overflow: scroll;
       height: 100%;
+      border: 2px solid #f1f1f1;
 
       &__content {
         margin: 20px auto;
-        background-color: yellow;
+        // background: #f1f1f1;
         position: relative;
       }
     }
@@ -82,4 +102,19 @@
 
 .editor-block {
   position: absolute;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+.editor-block-focus {
+  &::after {
+    border: 3px dashed red
+  }
 }

@@ -9,7 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "deepcopy": "^2.1.0",
     "element-plus": "^2.2.13",
+    "mitt": "^3.0.0",
     "vue": "^3.2.37"
   },
   "devDependencies": {
