@@ -24,7 +24,7 @@ const createTableProp = (label, table) => ({ type: 'table', label, table })
 registerConfig.register({
   label: '文本',
   preview: () => '预览文本',
-  render: () => '渲染文本',
+  render: ({ props }) => <span style={{ color: props.color, fontSize: props.size }}>{props.text || '渲染文本'}</span>,
   key: 'text',
   props: {
     text: createInputProp('文本内容'),
